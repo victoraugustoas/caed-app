@@ -1,10 +1,14 @@
+import 'package:caed_app/global/container/dependency_injection.dart';
+import 'package:caed_app/network/providers/auth_data_provider.dart';
 import 'package:caed_app/utils/assets.dart';
 import 'package:caed_app/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SigninView extends ConsumerStatefulWidget {
-  const SigninView({super.key});
+  final DependenciInjection container;
+
+  const SigninView({super.key, required this.container});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SigninViewState();
@@ -14,6 +18,10 @@ class _SigninViewState extends ConsumerState<SigninView> {
   final key = GlobalKey<FormState>();
   String _username = '';
   String _password = '';
+  bool _loading = false;
+
+  bool get loading => _loading;
+  set loading(bool value) => setState(() => _loading = value);
 
   String get password => _password;
   set password(String value) => setState(() => _password = value);
@@ -40,29 +48,25 @@ class _SigninViewState extends ConsumerState<SigninView> {
             child: _buildForm(),
           ),
           const Spacer(),
-          InkWell(
-            onTap: onSubmit,
-            child: Container(
-              height: 55,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.yellow,
-              ),
-              child: const Center(
-                  child: Text(
-                'Entrar',
-                style: TextStyle(color: Colors.black, fontSize: 18),
-              )),
-            ),
-          )
+          _buildContinueButton()
         ],
       ),
     );
   }
 
-  void onSubmit() {
+  void onSubmit() async {
     if (key.currentState?.validate() ?? false) {
-      // TODO add navigation to next view
+      try {
+        loading = true;
+        await widget.container
+            .find<AuthDataProvider>()
+            .signin(username, password);
+        // TODO add navigation to next view
+      } catch (e) {
+        // TODO catch error
+      } finally {
+        loading = false;
+      }
     }
   }
 
@@ -85,6 +89,33 @@ class _SigninViewState extends ConsumerState<SigninView> {
             validator: (v) => v != null && v == '' ? 'Preencha a senha' : null,
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildContinueButton() {
+    return InkWell(
+      onTap: onSubmit,
+      child: Container(
+        height: 55,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.yellow,
+        ),
+        child: Center(
+          child: !loading
+              ? const Text(
+                  'Entrar',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                )
+              : const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3,
+                  ),
+                ),
+        ),
       ),
     );
   }

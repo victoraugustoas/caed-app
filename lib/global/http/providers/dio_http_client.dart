@@ -21,6 +21,19 @@ class DioHttpClient implements HttpClient {
     }
   }
 
+  @override
+  Future<T> post<T>(String url, Map<String, dynamic> data) async {
+    try {
+      final Response response = await dio.post(url, data: data);
+      return response.data as T;
+    } on DioException catch (e) {
+      final networkError = _buildError(e);
+      throw networkError;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   HttpException _buildError(DioException error) {
     switch (error.type) {
       // TODO catch errors from dio

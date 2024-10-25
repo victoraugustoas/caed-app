@@ -1,3 +1,4 @@
+import 'package:caed_app/global/container/provider/get_it_provider.dart';
 import 'package:caed_app/screens/signin/signin_view.dart';
 import 'package:caed_app/screens/splash_screen/splash_screen_view.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ class SplashScreenRoute extends GoRouteData {
 class SigninRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const SigninView();
+    return SigninView(
+      container: GetItDIProvider(),
+    );
   }
 }
