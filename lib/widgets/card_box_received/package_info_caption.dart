@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-class BoxInfoCaption extends StatelessWidget {
-  final int totalBoxes;
-  final int boxCount;
+class PackageInfoCaption extends StatelessWidget {
+  final int totalPackages;
+  final int packageCount;
   final Color color;
   final String label;
 
-  const BoxInfoCaption({
+  const PackageInfoCaption({
     super.key,
-    required this.boxCount,
-    required this.totalBoxes,
+    required this.packageCount,
+    required this.totalPackages,
     required this.color,
     required this.label,
   });
 
   @override
   Widget build(BuildContext context) {
-    final double percentageReceived = boxCount / totalBoxes * 100;
+    final double percentageReceived = packageCount / totalPackages * 100;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildColoredBoxCaption(color),
+        _buildColoredPackageCaption(color),
         const SizedBox(width: 10),
         Expanded(
           child: Row(
@@ -38,7 +38,7 @@ class BoxInfoCaption extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '$boxCount pacotes',
+                    '$packageCount pacotes',
                     style: TextStyle(color: Theme.of(context).disabledColor),
                   ),
                 ],
@@ -59,7 +59,7 @@ class BoxInfoCaption extends StatelessWidget {
     );
   }
 
-  Widget _buildColoredBoxCaption(Color color) {
+  Widget _buildColoredPackageCaption(Color color) {
     return Container(
       height: 12,
       width: 12,

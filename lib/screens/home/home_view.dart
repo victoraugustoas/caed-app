@@ -1,7 +1,7 @@
 import 'package:caed_app/global/container/dependency_injection.dart';
-import 'package:caed_app/model/dto/box_data_dto.dart';
-import 'package:caed_app/widgets/box_data.dart';
+import 'package:caed_app/model/dto/package_data_dto.dart';
 import 'package:caed_app/widgets/card_box_received/card_box_status.dart';
+import 'package:caed_app/widgets/package_data.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -35,19 +35,19 @@ class HomeView extends StatelessWidget {
           children: [
             SizedBox(
               width: 320,
-              child: CardBoxTypeStatus(
-                type: BoxType.received,
-                boxReceived: 1560,
-                boxMissing: 440,
+              child: CardPackageTypeStatus(
+                type: PackageType.received,
+                packageReceived: 1560,
+                packageMissing: 440,
                 colorStatus: Colors.lightBlue.shade300,
               ),
             ),
             SizedBox(
               width: 320,
-              child: CardBoxTypeStatus(
-                type: BoxType.returned,
-                boxReceived: 1560,
-                boxMissing: 440,
+              child: CardPackageTypeStatus(
+                type: PackageType.returned,
+                packageReceived: 1560,
+                packageMissing: 440,
                 colorStatus: Colors.lightBlue.shade300,
               ),
             ),
@@ -55,6 +55,10 @@ class HomeView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildBoxes() {
+    return const Column();
   }
 
   Widget _buildTabs() {
@@ -71,8 +75,8 @@ class HomeView extends StatelessWidget {
         body: TabBarView(children: [
           Placeholder(),
           Placeholder(),
-          BoxData(
-            boxData: BoxDataDto(
+          PackageData(
+            packageData: PackageDataDto(
               code: "BX1234",
               deliveryPoint: "Central Warehouse",
               city: "São Paulo",

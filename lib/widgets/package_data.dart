@@ -1,12 +1,12 @@
-import 'package:caed_app/model/dto/box_data_dto.dart';
+import 'package:caed_app/model/dto/package_data_dto.dart';
 import 'package:flutter/material.dart';
 
-class BoxData extends StatelessWidget {
-  final BoxDataDto boxData;
+class PackageData extends StatelessWidget {
+  final PackageDataDto packageData;
 
-  const BoxData({
+  const PackageData({
     super.key,
-    required this.boxData,
+    required this.packageData,
   });
 
   @override
@@ -19,17 +19,17 @@ class BoxData extends StatelessWidget {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 20),
-        _buildRow('Código', boxData.code),
+        _buildRow('Código', packageData.code),
         _buildDivider(),
-        _buildRow('Ponto de entrega', boxData.deliveryPoint),
+        _buildRow('Ponto de entrega', packageData.deliveryPoint),
         _buildDivider(),
-        _buildRow('Município', boxData.city),
+        _buildRow('Município', packageData.city),
         _buildDivider(),
-        _buildRow('Escola', boxData.school),
+        _buildRow('Escola', packageData.school),
         _buildDivider(),
-        _buildRow('Ano escolar/Etapa', boxData.schoolStage),
+        _buildRow('Ano escolar/Etapa', packageData.schoolStage),
         _buildDivider(),
-        _buildRow('Componente curricular', boxData.schoolSubject),
+        _buildRow('Componente curricular', packageData.schoolSubject),
       ],
     );
   }

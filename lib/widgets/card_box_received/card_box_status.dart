@@ -1,18 +1,18 @@
-import 'package:caed_app/widgets/card_box_received/box_info_caption.dart';
+import 'package:caed_app/widgets/card_box_received/package_info_caption.dart';
 import 'package:flutter/material.dart';
 
-enum BoxType { received, returned }
+enum PackageType { received, returned }
 
-class CardBoxTypeStatus extends StatelessWidget {
-  final int boxReceived;
-  final int boxMissing;
-  final BoxType type;
+class CardPackageTypeStatus extends StatelessWidget {
+  final int packageReceived;
+  final int packageMissing;
+  final PackageType type;
   final Color colorStatus;
 
-  CardBoxTypeStatus({
+  CardPackageTypeStatus({
     super.key,
-    required this.boxMissing,
-    required this.boxReceived,
+    required this.packageMissing,
+    required this.packageReceived,
     required this.type,
     required this.colorStatus,
   });
@@ -46,18 +46,18 @@ class CardBoxTypeStatus extends StatelessWidget {
 
   String get title {
     switch (type) {
-      case BoxType.received:
+      case PackageType.received:
         return 'Recebimento de pacotes';
-      case BoxType.returned:
+      case PackageType.returned:
         return 'Devolução de pacotes';
     }
   }
 
   String get titleCaption {
     switch (type) {
-      case BoxType.received:
+      case PackageType.received:
         return 'Recebidos';
-      case BoxType.returned:
+      case PackageType.returned:
         return 'Devolvidos';
     }
   }
@@ -67,7 +67,7 @@ class CardBoxTypeStatus extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: boxReceived,
+          flex: packageReceived,
           child: Container(
             height: height,
             decoration: BoxDecoration(
@@ -78,7 +78,7 @@ class CardBoxTypeStatus extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Expanded(
-          flex: boxMissing,
+          flex: packageMissing,
           child: Container(
             height: height,
             decoration: BoxDecoration(
@@ -96,27 +96,27 @@ class CardBoxTypeStatus extends StatelessWidget {
       children: [
         _buildInfoCaption(
           titleCaption,
-          boxReceived,
+          packageReceived,
           colorStatus,
         ),
         const Spacer(),
         _buildInfoCaption(
           'Faltantes',
-          boxMissing,
+          packageMissing,
           colorBoxMissing,
         ),
       ],
     );
   }
 
-  Widget _buildInfoCaption(String label, int boxCount, Color color) {
-    final int totalBoxes = boxMissing + boxReceived;
+  Widget _buildInfoCaption(String label, int packageCount, Color color) {
+    final int totalPackages = packageMissing + packageReceived;
 
-    return BoxInfoCaption(
-      boxCount: boxCount,
+    return PackageInfoCaption(
+      packageCount: packageCount,
       color: color,
       label: label,
-      totalBoxes: totalBoxes,
+      totalPackages: totalPackages,
     );
   }
 }
