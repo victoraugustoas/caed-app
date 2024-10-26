@@ -17,37 +17,41 @@ class HomeView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             children: [
-              SizedBox(
-                height: 220,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 320,
-                        child: CardBoxTypeStatus(
-                          type: BoxType.received,
-                          boxReceived: 1560,
-                          boxMissing: 440,
-                          colorStatus: Colors.lightBlue.shade300,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 320,
-                        child: CardBoxTypeStatus(
-                          type: BoxType.returned,
-                          boxReceived: 1560,
-                          boxMissing: 440,
-                          colorStatus: Colors.lightBlue.shade300,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              _buildHorizontalCardBox(),
               Expanded(child: _buildTabs()),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHorizontalCardBox() {
+    return SizedBox(
+      height: 220,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 320,
+              child: CardBoxTypeStatus(
+                type: BoxType.received,
+                boxReceived: 1560,
+                boxMissing: 440,
+                colorStatus: Colors.lightBlue.shade300,
+              ),
+            ),
+            SizedBox(
+              width: 320,
+              child: CardBoxTypeStatus(
+                type: BoxType.returned,
+                boxReceived: 1560,
+                boxMissing: 440,
+                colorStatus: Colors.lightBlue.shade300,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -37,12 +37,8 @@ class BoxData extends StatelessWidget {
   Widget _buildRow(String label, String value) {
     return Row(
       children: [
-        Expanded(
-          child: Text(
-            label.toUpperCase(),
-            style: const TextStyle(letterSpacing: 1.5),
-          ),
-        ),
+        Expanded(child: Text(label.toUpperCase())),
+        const SizedBox(width: 8),
         Expanded(
           child: Text(
             value.toUpperCase(),
