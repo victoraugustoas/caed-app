@@ -1,19 +1,19 @@
 import 'package:caed_app/widgets/card_box_received/package_info_caption.dart';
 import 'package:flutter/material.dart';
 
-enum PackageType { received, returned }
+enum PackageStatusType { received, returned }
 
 class CardPackageTypeStatus extends StatelessWidget {
   final int packageReceived;
   final int packageMissing;
-  final PackageType type;
+  final PackageStatusType status;
   final Color colorStatus;
 
   CardPackageTypeStatus({
     super.key,
     required this.packageMissing,
     required this.packageReceived,
-    required this.type,
+    required this.status,
     required this.colorStatus,
   });
 
@@ -45,19 +45,19 @@ class CardPackageTypeStatus extends StatelessWidget {
   }
 
   String get title {
-    switch (type) {
-      case PackageType.received:
+    switch (status) {
+      case PackageStatusType.received:
         return 'Recebimento de pacotes';
-      case PackageType.returned:
+      case PackageStatusType.returned:
         return 'Devolução de pacotes';
     }
   }
 
   String get titleCaption {
-    switch (type) {
-      case PackageType.received:
+    switch (status) {
+      case PackageStatusType.received:
         return 'Recebidos';
-      case PackageType.returned:
+      case PackageStatusType.returned:
         return 'Devolvidos';
     }
   }

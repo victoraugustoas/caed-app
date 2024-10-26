@@ -2,6 +2,7 @@ import 'package:caed_app/global/container/dependency_injection.dart';
 import 'package:caed_app/model/dto/package_data_dto.dart';
 import 'package:caed_app/widgets/card_box_received/card_box_status.dart';
 import 'package:caed_app/widgets/package_data.dart';
+import 'package:caed_app/widgets/package_list/package_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -36,7 +37,7 @@ class HomeView extends StatelessWidget {
             SizedBox(
               width: 320,
               child: CardPackageTypeStatus(
-                type: PackageType.received,
+                status: PackageStatusType.received,
                 packageReceived: 1560,
                 packageMissing: 440,
                 colorStatus: Colors.lightBlue.shade300,
@@ -45,7 +46,7 @@ class HomeView extends StatelessWidget {
             SizedBox(
               width: 320,
               child: CardPackageTypeStatus(
-                type: PackageType.returned,
+                status: PackageStatusType.returned,
                 packageReceived: 1560,
                 packageMissing: 440,
                 colorStatus: Colors.lightBlue.shade300,
@@ -57,25 +58,22 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _buildBoxes() {
-    return const Column();
-  }
-
   Widget _buildTabs() {
-    return const DefaultTabController(
+    return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: TabBar(
+        appBar: const TabBar(
           tabs: [
             Tab(text: 'Pacotes'),
             Tab(text: 'Status'),
             Tab(text: 'Dados'),
           ],
         ),
+        restorationId: '1',
         body: TabBarView(children: [
-          Placeholder(),
-          Placeholder(),
-          PackageData(
+          PackageList(container: container),
+          const Placeholder(),
+          const PackageData(
             packageData: PackageDataDto(
               code: "BX1234",
               deliveryPoint: "Central Warehouse",
