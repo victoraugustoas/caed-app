@@ -1,4 +1,5 @@
 import 'package:caed_app/global/initializer.dart';
+import 'package:caed_app/routes/routes.dart';
 import 'package:caed_app/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,7 @@ class SplashScreenView extends ConsumerWidget {
     ref.listen(initializerProvider, (_, state) {
       if (!state.isLoading) {
         if (context.mounted) {
-          // TODO add here navigation
+          SigninRoute().pushReplacement(context);
         }
       }
     });
