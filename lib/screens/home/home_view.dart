@@ -3,6 +3,7 @@ import 'package:caed_app/model/dto/package_data_dto.dart';
 import 'package:caed_app/widgets/card_box_received/card_box_status.dart';
 import 'package:caed_app/widgets/package_data.dart';
 import 'package:caed_app/widgets/package_list/package_list.dart';
+import 'package:caed_app/widgets/package_timelime.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -72,7 +73,24 @@ class HomeView extends StatelessWidget {
         restorationId: '1',
         body: TabBarView(children: [
           PackageList(container: container),
-          const Placeholder(),
+          PackageTimelime(
+            steps: [
+              TimelineStep(
+                  date: DateTime.now(),
+                  label: 'Coordenador recebeu a caixa da transportadora'),
+              TimelineStep(
+                  date: DateTime.now(),
+                  label: 'Coordenador abriu a caixa para leitura dos pacotes'),
+              TimelineStep(
+                date: DateTime.now(),
+                label: 'Coordenador leu todos os pacotes desta caixa',
+              ),
+              TimelineStep(
+                date: DateTime.now(),
+                label: 'Coordenador devolveu a caixa à transportadora',
+              ),
+            ],
+          ),
           const PackageData(
             packageData: PackageDataDto(
               code: "BX1234",
