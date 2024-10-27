@@ -2,7 +2,7 @@ import 'package:caed_app/global/container/dependency_injection.dart';
 import 'package:caed_app/model/dto/package_data_dto.dart';
 import 'package:caed_app/widgets/card_box_received/card_box_status.dart';
 import 'package:caed_app/widgets/package_data.dart';
-import 'package:caed_app/widgets/package_list/package_list.dart';
+import 'package:caed_app/widgets/package_list/widgets/package_list.dart';
 import 'package:caed_app/widgets/package_timelime.dart';
 import 'package:flutter/material.dart';
 
