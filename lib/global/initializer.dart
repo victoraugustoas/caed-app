@@ -3,6 +3,7 @@ import "package:caed_app/global/container/provider/get_it_provider.dart";
 import "package:caed_app/global/http/network_module.dart";
 import "package:caed_app/global/http/providers/dio_http_client.dart";
 import "package:caed_app/network/providers/auth_data_provider.dart";
+import "package:caed_app/network/providers/packages_data_provider.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
 part "initializer.g.dart";
@@ -22,6 +23,9 @@ class Initializer extends _$Initializer {
 
     // Data providers
     dependenciInjection.putIfAbsent(AuthDataProvider(httpClient: httpClient));
+    dependenciInjection.putIfAbsent(
+      PackagesDataProvider(httpClient: httpClient),
+    );
 
     // Services
     // TODO add here app services

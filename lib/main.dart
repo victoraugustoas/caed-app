@@ -2,6 +2,7 @@ import 'package:caed_app/global/initializer.dart';
 import 'package:caed_app/global/router/go_router_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const ProviderScope(child: CaedApp()));
@@ -33,6 +34,7 @@ class _CaedAppState extends ConsumerState<CaedApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.white,
+        textTheme: GoogleFonts.montserratTextTheme(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:caed_app/global/container/dependency_injection.dart';
 import 'package:caed_app/network/providers/auth_data_provider.dart';
+import 'package:caed_app/routes/routes.dart';
 import 'package:caed_app/utils/assets.dart';
 import 'package:caed_app/widgets/input.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,9 @@ class _SigninViewState extends ConsumerState<SigninView> {
         await widget.container
             .find<AuthDataProvider>()
             .signin(username, password);
-        // TODO add navigation to next view
+        if (mounted) {
+          HomeRoute().pushReplacement(context);
+        }
       } catch (e) {
         // TODO catch error
       } finally {

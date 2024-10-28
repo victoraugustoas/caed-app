@@ -1,4 +1,5 @@
 import 'package:caed_app/global/container/provider/get_it_provider.dart';
+import 'package:caed_app/screens/home/home_view.dart';
 import 'package:caed_app/screens/signin/signin_view.dart';
 import 'package:caed_app/screens/splash_screen/splash_screen_view.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,17 @@ class SigninRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return SigninView(
+      container: GetItDIProvider(),
+    );
+  }
+}
+
+@TypedGoRoute<HomeRoute>(path: '/home')
+@immutable
+class HomeRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return HomeView(
       container: GetItDIProvider(),
     );
   }
