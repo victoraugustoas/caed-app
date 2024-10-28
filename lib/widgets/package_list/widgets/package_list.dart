@@ -1,4 +1,5 @@
 import 'package:caed_app/global/container/dependency_injection.dart';
+import 'package:caed_app/routes/routes.dart';
 import 'package:caed_app/widgets/package_list/controller/package_list_controller.dart';
 import 'package:caed_app/widgets/package_list/widgets/package_row.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,9 @@ class _PackageListState extends ConsumerState<PackageList> {
                           return PackageRow(
                             code: package.code,
                             status: package.status,
+                            onPressed: () =>
+                                PackageDetailRoute(code: package.code)
+                                    .push(context),
                           );
                         },
                         separatorBuilder: (context, index) {
