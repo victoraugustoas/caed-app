@@ -31,6 +31,11 @@ class _HomeShellViewState extends State<HomeShellView> {
       body: widget.child,
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
+          final currentIndex = getCurrentIndex();
+          // prevent push if already on route
+          if (currentIndex == index) {
+            return;
+          }
           switch (index) {
             case 0:
               HomeTabRoute().push(context);

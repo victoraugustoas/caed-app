@@ -2,6 +2,7 @@ import "package:caed_app/global/container/dependency_injection.dart";
 import "package:caed_app/global/container/provider/get_it_provider.dart";
 import "package:caed_app/global/http/network_module.dart";
 import "package:caed_app/global/http/providers/dio_http_client.dart";
+import "package:caed_app/global/logs/logs.dart";
 import "package:caed_app/network/providers/auth_data_provider.dart";
 import "package:caed_app/network/providers/packages_data_provider.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
@@ -28,7 +29,9 @@ class Initializer extends _$Initializer {
     );
 
     // Services
-    // TODO add here app services
+    final logService = LogService();
+    logService.initialize();
+    dependenciInjection.putIfAbsent(logService);
 
     await Future.delayed(const Duration(seconds: 1));
     state = const AsyncData(null);
