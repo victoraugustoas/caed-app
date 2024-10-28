@@ -20,12 +20,12 @@ class PackageListState with _$PackageListState {
 class PackageListController extends _$PackageListController {
   @override
   FutureOr<PackageListState> build() async {
-    final authRepository = GetItDIProvider().find<PackagesDataProvider>();
+    final packagesDataProvider = GetItDIProvider().find<PackagesDataProvider>();
     state = const AsyncLoading();
     if (state.value == null) {
       state = const AsyncData(PackageListState(page: 0, packageList: null));
     }
-    final response = await authRepository.list(10, state.value!.page);
+    final response = await packagesDataProvider.list(10, state.value!.page);
 
     // see this: https://riverpod.dev/docs/essentials/auto_dispose#fine-tuned-disposal-with-refkeepalive
     ref.keepAlive();

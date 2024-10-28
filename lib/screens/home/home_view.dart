@@ -70,7 +70,6 @@ class HomeView extends StatelessWidget {
             Tab(text: 'Dados'),
           ],
         ),
-        restorationId: '1',
         body: TabBarView(children: [
           PackageList(container: container),
           PackageTimelime(

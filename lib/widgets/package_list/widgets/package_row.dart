@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 class PackageRow extends StatelessWidget {
   final String code;
   final List<PackageStatus> status;
+  final void Function()? onPressed;
 
   const PackageRow({
     super.key,
     required this.code,
     required this.status,
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // TODO add navigation
-      },
+      onTap: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
