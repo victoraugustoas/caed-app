@@ -106,7 +106,16 @@ class _PackageListState extends ConsumerState<PackageList> {
                         itemCount: state.value!.packageList!.content.length,
                       ),
                     ),
-                  )
+                  ),
+                  if (state.isLoading)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: SizedBox(
+                        height: 32,
+                        width: 32,
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
                 ],
               );
   }
