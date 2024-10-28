@@ -1,35 +1,50 @@
-import 'package:caed_app/screens/home/widgets/home_tab_view.dart';
+import 'package:caed_app/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class HomeShellView extends StatefulWidget {
+  final Widget child;
+
+  const HomeShellView({
+    super.key,
+    required this.child,
+  });
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomeShellView> createState() => _HomeShellViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
-  int _selectedIndex = 0;
+class _HomeShellViewState extends State<HomeShellView> {
+  int getCurrentIndex() {
+    final String location = GoRouterState.of(context).uri.path;
+    if (location.startsWith(HomeTabRoute().location)) {
+      return 0;
+    } else if (location.startsWith(OptionsTabRoute().location)) {
+      return 1;
+    }
+    return 2;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: const [
-          HomeTabView(),
-          Center(child: Text('Opções')),
-          Center(child: Text('Tutoriais'))
-        ],
-      ),
+      body: widget.child,
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          switch (index) {
+            case 0:
+              HomeTabRoute().push(context);
+              break;
+            case 1:
+              OptionsTabRoute().push(context);
+              break;
+            case 2:
+              TutorialsTabRoute().push(context);
+              break;
+          }
         },
         indicatorColor: Colors.blue.shade100,
-        selectedIndex: _selectedIndex,
+        selectedIndex: getCurrentIndex(),
         destinations: const <Widget>[
           NavigationDestination(
             icon: Icon(Icons.home),

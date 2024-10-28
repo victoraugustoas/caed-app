@@ -61,7 +61,7 @@ class _SigninViewState extends ConsumerState<SigninView> {
             .find<AuthDataProvider>()
             .signin(username, password);
         if (mounted) {
-          HomeRoute().pushReplacement(context);
+          HomeTabRoute().pushReplacement(context);
         }
       } catch (e) {
         // TODO catch error
