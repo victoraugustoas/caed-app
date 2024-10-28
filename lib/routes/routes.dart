@@ -1,4 +1,3 @@
-import 'package:caed_app/global/container/provider/get_it_provider.dart';
 import 'package:caed_app/screens/home/home_view.dart';
 import 'package:caed_app/screens/package_detail/view/package_detail_view.dart';
 import 'package:caed_app/screens/signin/signin_view.dart';
@@ -22,9 +21,7 @@ class SplashScreenRoute extends GoRouteData {
 class SigninRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SigninView(
-      container: GetItDIProvider(),
-    );
+    return const SigninView();
   }
 }
 
@@ -33,9 +30,7 @@ class SigninRoute extends GoRouteData {
 class HomeRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return HomeView(
-      container: GetItDIProvider(),
-    );
+    return const HomeView();
   }
 }
 
@@ -47,9 +42,6 @@ class PackageDetailRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PackageDetailView(
-      container: GetItDIProvider(),
-      code: code,
-    );
+    return PackageDetailView(code: code);
   }
 }

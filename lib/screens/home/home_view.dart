@@ -1,4 +1,3 @@
-import 'package:caed_app/global/container/dependency_injection.dart';
 import 'package:caed_app/model/dto/package_data_dto.dart';
 import 'package:caed_app/widgets/card_box_received/card_box_status.dart';
 import 'package:caed_app/widgets/package_data.dart';
@@ -7,9 +6,7 @@ import 'package:caed_app/widgets/package_timelime.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
-  final DependenciInjection container;
-
-  const HomeView({super.key, required this.container});
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +68,7 @@ class HomeView extends StatelessWidget {
           ],
         ),
         body: TabBarView(children: [
-          PackageList(container: container),
+          const PackageList(),
           PackageTimelime(
             steps: [
               TimelineStep(

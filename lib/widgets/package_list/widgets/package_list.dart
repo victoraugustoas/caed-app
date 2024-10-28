@@ -1,4 +1,3 @@
-import 'package:caed_app/global/container/dependency_injection.dart';
 import 'package:caed_app/routes/routes.dart';
 import 'package:caed_app/widgets/package_list/controller/package_list_controller.dart';
 import 'package:caed_app/widgets/package_list/widgets/package_row.dart';
@@ -6,12 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PackageList extends ConsumerStatefulWidget {
-  final DependenciInjection container;
-
-  const PackageList({
-    super.key,
-    required this.container,
-  });
+  const PackageList({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _PackageListState();

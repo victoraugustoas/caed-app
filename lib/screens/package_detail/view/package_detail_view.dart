@@ -1,4 +1,3 @@
-import 'package:caed_app/global/container/dependency_injection.dart';
 import 'package:caed_app/screens/package_detail/controller/package_details_controller.dart';
 import 'package:caed_app/widgets/package_data.dart';
 import 'package:caed_app/widgets/package_timelime.dart';
@@ -6,13 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PackageDetailView extends ConsumerStatefulWidget {
-  final DependenciInjection container;
   final String code;
 
   const PackageDetailView({
     super.key,
     required this.code,
-    required this.container,
   });
 
   @override
