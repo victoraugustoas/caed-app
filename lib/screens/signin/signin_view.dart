@@ -1,4 +1,4 @@
-import 'package:caed_app/global/container/dependency_injection.dart';
+import 'package:caed_app/global/container/provider/get_it_provider.dart';
 import 'package:caed_app/network/providers/auth_data_provider.dart';
 import 'package:caed_app/routes/routes.dart';
 import 'package:caed_app/utils/assets.dart';
@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SigninView extends ConsumerStatefulWidget {
-  final DependenciInjection container;
-
-  const SigninView({super.key, required this.container});
+  const SigninView({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SigninViewState();
@@ -59,11 +57,11 @@ class _SigninViewState extends ConsumerState<SigninView> {
     if (key.currentState?.validate() ?? false) {
       try {
         loading = true;
-        await widget.container
+        await GetItDIProvider()
             .find<AuthDataProvider>()
             .signin(username, password);
         if (mounted) {
-          HomeRoute().pushReplacement(context);
+          HomeTabRoute().pushReplacement(context);
         }
       } catch (e) {
         // TODO catch error

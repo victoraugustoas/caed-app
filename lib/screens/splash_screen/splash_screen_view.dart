@@ -12,7 +12,7 @@ class SplashScreenView extends ConsumerWidget {
     ref.listen(initializerProvider, (_, state) {
       if (!state.isLoading) {
         if (context.mounted) {
-          HomeRoute().pushReplacement(context);
+          HomeTabRoute().pushReplacement(context);
         }
       }
     });

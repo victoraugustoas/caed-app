@@ -1,106 +1,69 @@
-import 'package:caed_app/global/container/dependency_injection.dart';
-import 'package:caed_app/model/dto/package_data_dto.dart';
-import 'package:caed_app/widgets/card_box_received/card_box_status.dart';
-import 'package:caed_app/widgets/package_data.dart';
-import 'package:caed_app/widgets/package_list/widgets/package_list.dart';
-import 'package:caed_app/widgets/package_timelime.dart';
+import 'package:caed_app/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class HomeView extends StatelessWidget {
-  final DependenciInjection container;
+class HomeShellView extends StatefulWidget {
+  final Widget child;
 
-  const HomeView({super.key, required this.container});
+  const HomeShellView({
+    super.key,
+    required this.child,
+  });
+
+  @override
+  State<HomeShellView> createState() => _HomeShellViewState();
+}
+
+class _HomeShellViewState extends State<HomeShellView> {
+  int getCurrentIndex() {
+    final String location = GoRouterState.of(context).uri.path;
+    if (location.startsWith(HomeTabRoute().location)) {
+      return 0;
+    } else if (location.startsWith(OptionsTabRoute().location)) {
+      return 1;
+    }
+    return 2;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            children: [
-              _buildHorizontalCardBox(),
-              Expanded(child: _buildTabs()),
-            ],
+      body: widget.child,
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          final currentIndex = getCurrentIndex();
+          // prevent push if already on route
+          if (currentIndex == index) {
+            return;
+          }
+          switch (index) {
+            case 0:
+              HomeTabRoute().push(context);
+              break;
+            case 1:
+              OptionsTabRoute().push(context);
+              break;
+            case 2:
+              TutorialsTabRoute().push(context);
+              break;
+          }
+        },
+        indicatorColor: Colors.blue.shade100,
+        selectedIndex: getCurrentIndex(),
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHorizontalCardBox() {
-    return SizedBox(
-      height: 220,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            SizedBox(
-              width: 320,
-              child: CardPackageTypeStatus(
-                status: PackageStatusType.received,
-                packageReceived: 1560,
-                packageMissing: 440,
-                colorStatus: Colors.lightBlue.shade300,
-              ),
-            ),
-            SizedBox(
-              width: 320,
-              child: CardPackageTypeStatus(
-                status: PackageStatusType.returned,
-                packageReceived: 1560,
-                packageMissing: 440,
-                colorStatus: Colors.lightBlue.shade300,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTabs() {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: const TabBar(
-          tabs: [
-            Tab(text: 'Pacotes'),
-            Tab(text: 'Status'),
-            Tab(text: 'Dados'),
-          ],
-        ),
-        body: TabBarView(children: [
-          PackageList(container: container),
-          PackageTimelime(
-            steps: [
-              TimelineStep(
-                  date: DateTime.now(),
-                  label: 'Coordenador recebeu a caixa da transportadora'),
-              TimelineStep(
-                  date: DateTime.now(),
-                  label: 'Coordenador abriu a caixa para leitura dos pacotes'),
-              TimelineStep(
-                date: DateTime.now(),
-                label: 'Coordenador leu todos os pacotes desta caixa',
-              ),
-              TimelineStep(
-                date: DateTime.now(),
-                label: 'Coordenador devolveu a caixa à transportadora',
-              ),
-            ],
+          NavigationDestination(
+            icon: Icon(Icons.settings),
+            label: 'Opções',
           ),
-          const PackageData(
-            packageData: PackageDataDto(
-              code: "BX1234",
-              deliveryPoint: "Central Warehouse",
-              city: "São Paulo",
-              school: "Escola Estadual de São Paulo",
-              schoolStage: "Ensino Médio",
-              schoolSubject: "Matemática",
-            ),
-          )
-        ]),
+          NavigationDestination(
+            icon: Icon(Icons.school),
+            label: 'Tutoriais',
+          ),
+        ],
       ),
     );
   }
