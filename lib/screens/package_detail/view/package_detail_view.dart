@@ -21,7 +21,6 @@ class _PackageDetailViewState extends ConsumerState<PackageDetailView> {
   @override
   Widget build(BuildContext context) {
     final controller = ref.watch(packageDetailsControllerProvider(widget.code));
-    final state = controller.value;
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +38,7 @@ class _PackageDetailViewState extends ConsumerState<PackageDetailView> {
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: DefaultTabController(
-                    length: 3,
+                    length: 2,
                     child: Scaffold(
                       appBar: const TabBar(
                         tabs: [
@@ -49,7 +48,7 @@ class _PackageDetailViewState extends ConsumerState<PackageDetailView> {
                       ),
                       body: TabBarView(children: [
                         PackageTimelime(
-                          steps: state!.packageDetails!.status
+                          steps: controller.value!.packageDetails!.status
                               .map(
                                 (e) => TimelineStep(
                                   date: e.date,
@@ -59,7 +58,7 @@ class _PackageDetailViewState extends ConsumerState<PackageDetailView> {
                               .toList(),
                         ),
                         PackageData(
-                          packageData: state.packageDetails!.packageData,
+                          packageData: controller.value!.packageDetails!.packageData,
                         )
                       ]),
                     ),
